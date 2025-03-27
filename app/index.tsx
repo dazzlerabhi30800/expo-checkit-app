@@ -2,10 +2,10 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { colors } from "@/utils/color";
 import { useTodoSlice } from "@/context/Slice";
-import { Link } from "expo-router";
+import { Link, Redirect } from "expo-router";
 
 const index = () => {
-  const { theme } = useTodoSlice((state) => state);
+  const { theme, user } = useTodoSlice((state) => state);
   return (
     <View
       style={[styles.wrapper, theme === "dark" ? styles.dark : styles.light]}
@@ -13,11 +13,19 @@ const index = () => {
       <Text
         style={[styles.text, theme === "light" && { color: colors.textlight }]}
       >
-        Welcome to Check It, the true minimalism.
+        {user
+          ? `Welcome back ${user.display_name}, go to Task page.`
+          : "Welcome to Check It, the true minimalism."}
       </Text>
-      <Link href={"/login"} style={styles.link}>
-        Login Page
-      </Link>
+      {user ? (
+        <Link href={"/task"} style={styles.link}>
+          Task Page
+        </Link>
+      ) : (
+        <Link href={"/login"} style={styles.link}>
+          Login Page
+        </Link>
+      )}
     </View>
   );
 };

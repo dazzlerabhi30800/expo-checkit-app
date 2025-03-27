@@ -4,7 +4,8 @@ import InputComp from "@/components/InputComp";
 import SubmitBtnComp from "@/components/SubmitBtnComp";
 import { useTodoSlice } from "@/context/Slice";
 import { colors } from "@/utils/color";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { supabase } from "@/utils/supabase/supabase";
 
 const explorer = () => {
   const handleAuth = () => {
@@ -14,8 +15,36 @@ const explorer = () => {
   const { theme } = useTodoSlice((state) => state);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { wrapper, text, dark, light } = styles;
+
+  const handleLogin = async () => {
+    setLoading(true);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!password.length) {
+      Alert.alert("password is required");
+      setLoading(false);
+      return;
+    }
+    if (!email.match(emailRegex)) {
+      Alert.alert("email is not valid");
+      setLoading(false);
+      return;
+    }
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    if (error) {
+      Alert.alert(error.message);
+      setLoading(false);
+    } else {
+      setLoading(false);
+      router.replace("/task");
+    }
+  };
+
   return (
     <View style={[wrapper, theme === "dark" ? dark : light]}>
       <Text style={[text, theme === "light" && { color: colors.textlight }]}>
@@ -34,7 +63,8 @@ const explorer = () => {
         placeholderText="Enter your password"
       />
       <SubmitBtnComp
-        onPress={handleAuth}
+        loading={loading}
+        onPress={handleLogin}
         title="Login"
         theme={theme as "light" | "dark"}
       />

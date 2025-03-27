@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, AppState } from "react-native";
 import React from "react";
 import { useTodoSlice } from "@/context/Slice";
 import { colors } from "@/utils/color";
@@ -6,18 +6,54 @@ import { useState } from "react";
 import InputComp from "@/components/InputComp";
 import SubmitBtnComp from "@/components/SubmitBtnComp";
 import { Link } from "expo-router";
+import { supabase } from "@/utils/supabase/supabase";
+
+AppState.addEventListener("change", (state) => {
+  if (state === "active") {
+    supabase.auth.startAutoRefresh();
+  } else {
+    supabase.auth.stopAutoRefresh();
+  }
+});
 
 const index = () => {
-  const handleAuth = () => {
-    Alert.alert("You are signed in using Google");
-  };
-
   const { theme } = useTodoSlice((state) => state);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { wrapper, text, dark, light } = styles;
+
+  const handleAuth = async () => {
+    setLoading(true);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!name.length || !password.length) {
+      Alert.alert("all fields are required");
+      setLoading(false);
+      return;
+    }
+    if (!email.match(emailRegex)) {
+      Alert.alert("email is not valid");
+      setLoading(false);
+      return;
+    }
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          display_name: name,
+        },
+      },
+    });
+    if (error) {
+      Alert.alert(error.message);
+    } else {
+      console.log(data);
+    }
+    setLoading(false);
+  };
 
   return (
     <View style={[wrapper, theme === "dark" ? dark : light]}>
@@ -44,6 +80,7 @@ const index = () => {
       />
       <SubmitBtnComp
         onPress={handleAuth}
+        loading={loading}
         title="Sign Up"
         theme={theme as "light" | "dark"}
       />

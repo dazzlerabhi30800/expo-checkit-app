@@ -2,8 +2,11 @@ import { Tabs } from "expo-router";
 import React from "react";
 import { Platform } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useTodoSlice } from "@/context/Slice";
+import { colors } from "@/utils/color";
 
 export default function TabLayout() {
+  const theme = useTodoSlice((state) => state.theme);
   return (
     <Tabs
       screenOptions={{
@@ -13,25 +16,27 @@ export default function TabLayout() {
             // Use a transparent background on iOS to show the blur effect
             position: "absolute",
           },
-          default: {},
+          default: {
+            backgroundColor: theme === "dark" ? colors.darkBg : "white",
+          },
         }),
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="task"
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons color={color} name="house" size={25} />
+            <MaterialIcons color={color} name="home" size={25} />
           ),
         }}
       />
       <Tabs.Screen
-        name="explorer"
+        name="account"
         options={{
-          title: "Explore",
+          title: "Profile",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons color={color} name="send" size={25} />
+            <MaterialIcons color={color} name="account-circle" size={25} />
           ),
         }}
       />

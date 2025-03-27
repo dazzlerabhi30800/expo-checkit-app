@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import Header from "@/components/Header";
 import { useTodoSlice } from "@/context/Slice";
+import { supabase } from "@/utils/supabase/supabase";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -14,13 +15,23 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
-  const { theme } = useTodoSlice((state) => state);
+  const { theme, setUser } = useTodoSlice((state) => state);
 
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
+
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        setUser(session?.user.user_metadata);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
 
   if (!loaded) {
     return null;
