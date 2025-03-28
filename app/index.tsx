@@ -6,6 +6,7 @@ import { Link, Redirect } from "expo-router";
 
 const index = () => {
   const { theme, user } = useTodoSlice((state) => state);
+  if (user) return <Redirect href={"/task"} />;
   return (
     <View
       style={[styles.wrapper, theme === "dark" ? styles.dark : styles.light]}
@@ -13,19 +14,11 @@ const index = () => {
       <Text
         style={[styles.text, theme === "light" && { color: colors.textlight }]}
       >
-        {user
-          ? `Welcome back ${user.display_name}, go to Task page.`
-          : "Welcome to Check It, the true minimalism."}
+        Welcome to Check It, the true minimalism
       </Text>
-      {user ? (
-        <Link href={"/task"} style={styles.link}>
-          Task Page
-        </Link>
-      ) : (
-        <Link href={"/login"} style={styles.link}>
-          Login Page
-        </Link>
-      )}
+      <Link href={"/login"} style={styles.link}>
+        Login Page
+      </Link>
     </View>
   );
 };
