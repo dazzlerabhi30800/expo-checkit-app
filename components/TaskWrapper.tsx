@@ -1,7 +1,10 @@
-import { View, Text, StyleSheet, FlatList, RefreshControl } from "react-native";
+import { FlatList, RefreshControl, View } from "react-native";
 import React, { useState } from "react";
 import TaskComp from "./TaskComp";
 import { useTodoSlice } from "@/context/Slice";
+import TaskInput from "./TaskInput";
+import ViewWrapper from "./ViewWrapper";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const TaskWrapper = () => {
   const { todos, getTodos } = useTodoSlice((state) => state);
@@ -13,32 +16,27 @@ const TaskWrapper = () => {
   };
 
   return (
-    <View style={styles.taskWrapper}>
-      <FlatList
-        data={todos}
-        keyExtractor={(todo) => todo.id}
-        renderItem={({ item }) => <TaskComp item={item} />}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        ItemSeparatorComponent={() => (
-          <View
+    <ViewWrapper padding={0}>
+      {/* <TaskInput /> */}
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <View style={{ flex: 1, width: 350 }}>
+          <FlatList
+            data={todos}
+            keyExtractor={(todo) => todo.id}
             style={{
-              height: 10,
+              height: "100%",
+              width: "100%",
             }}
-          ></View>
-        )}
-      />
-    </View>
+            ListHeaderComponent={() => <TaskInput />}
+            renderItem={({ item }) => <TaskComp item={item} />}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          />
+        </View>
+      </GestureHandlerRootView>
+    </ViewWrapper>
   );
 };
 
 export default TaskWrapper;
-
-const styles = StyleSheet.create({
-  taskWrapper: {
-    marginTop: 10,
-    gap: 10,
-    width: 300,
-  },
-});

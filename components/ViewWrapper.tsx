@@ -1,13 +1,27 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React from "react";
 import { colors } from "@/utils/color";
 import { useTodoSlice } from "@/context/Slice";
 
-const ViewWrapper = ({ children }: { children: React.ReactNode }) => {
+const ViewWrapper = ({
+  children,
+  padding,
+}: {
+  children: React.ReactNode;
+  padding?: number;
+}) => {
   const { wrapper, dark, light } = styles;
   const theme = useTodoSlice((state) => state.theme);
   return (
-    <View style={[wrapper, theme === "dark" ? dark : light]}>{children}</View>
+    <View
+      style={[
+        wrapper,
+        theme === "dark" ? dark : light,
+        { paddingHorizontal: padding ?? 20 },
+      ]}
+    >
+      {children}
+    </View>
   );
 };
 
@@ -19,7 +33,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 25,
-    paddingHorizontal: 20,
+    width: "100%",
   },
   dark: {
     backgroundColor: colors.darkBg,

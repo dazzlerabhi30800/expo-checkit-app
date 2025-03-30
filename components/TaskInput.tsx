@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
@@ -45,7 +44,7 @@ const TaskInput = () => {
   };
 
   return (
-    <View style={inputContainer}>
+    <View style={[inputContainer, { marginTop: 30, marginBottom: 40 }]}>
       <TextInput
         style={[inputStyle, { color: inputColor, borderColor: borderColor }]}
         value={todoString}
@@ -64,7 +63,7 @@ export default TaskInput;
 
 const styles = StyleSheet.create({
   inputContainer: {
-    width: 300,
+    width: 330,
     flexDirection: "row",
   },
   inputStyle: {
@@ -77,7 +76,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 0,
   },
   btnStyle: {
-    backgroundColor: colors.cyan,
+    backgroundColor: colors.cyanDark,
     padding: 15,
     borderEndStartRadius: 5,
     borderEndEndRadius: 5,

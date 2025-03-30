@@ -1,7 +1,11 @@
 1. X -> make a header
 2. X -> dark/light theme toggle
 3. X -> change header logo
-4. -> Google sign in button (for now skip this);
-5. -> Design Sign up page
-6. -> Design login up page
-7. -> useEffect func to check active user session.
+4. X -> Google sign in button (for now skip this);
+5. X -> Design Sign up page
+6. X -> Design login up page
+7. X -> useEffect func to check active user session.
+8. -> complete the task component with delete, edit & animations.
+10. -> add the taskInput comp as header in flatList
+11. -> splash image update
+12. -> app icon update

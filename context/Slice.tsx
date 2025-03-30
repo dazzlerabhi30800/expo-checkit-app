@@ -40,14 +40,18 @@ export const useTodoSlice = create<slice>()(
           Alert.alert(error.message);
         }
         if (!error && data) {
-          set({ todos: data });
+          set({ todos: data.sort((a, b) => a.position - b.position) });
         }
       },
     }),
     {
       name: "check-it",
       storage: createJSONStorage(() => AsyncStorage),
-      partialize: (state) => ({ user: state.user }),
-    }
-  )
+      partialize: (state) => ({
+        theme: state.theme,
+        user: state.user,
+        todos: state.todos,
+      }),
+    },
+  ),
 );

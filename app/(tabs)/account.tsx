@@ -9,11 +9,11 @@ import { router } from "expo-router";
 
 const account = () => {
   const { user, theme } = useTodoSlice((state) => state);
-  console.log(user);
   const handleLogout = async () => {
     await supabase.auth.signOut();
     router.replace("/");
   };
+
   return (
     <ViewWrapper>
       <View
@@ -31,6 +31,11 @@ const account = () => {
           {user?.display_name.charAt(0).toUpperCase()}
         </Text>
       </View>
+      <Text
+        style={{ color: theme === "dark" ? "white" : "black", fontSize: 25 }}
+      >
+        {user?.display_name}
+      </Text>
       <TouchableOpacity
         onPress={handleLogout}
         style={{

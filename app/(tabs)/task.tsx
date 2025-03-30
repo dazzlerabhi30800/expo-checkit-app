@@ -1,23 +1,19 @@
-import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
-import React, { useEffect, useState } from "react";
-import ViewWrapper from "@/components/ViewWrapper";
-import TaskInput from "@/components/TaskInput";
+import React, { useEffect } from "react";
 import { useTodoSlice } from "@/context/Slice";
 import TaskWrapper from "@/components/TaskWrapper";
+import { View } from "react-native";
 
 const task = () => {
-  const { getTodos, todos } = useTodoSlice((state) => state);
+  const { getTodos } = useTodoSlice((state) => state);
 
   // NOTE: fetch todos
   useEffect(() => {
     getTodos();
   }, []);
-  console.log(todos);
   return (
-    <ViewWrapper>
-      <TaskInput />
+    <View style={{ flex: 1 }}>
       <TaskWrapper />
-    </ViewWrapper>
+    </View>
   );
 };
 
