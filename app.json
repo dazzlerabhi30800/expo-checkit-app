@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "check-it-app",
+    "name": "Check It",
     "slug": "check-it-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -28,10 +28,14 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon-check.png",
+          "image": "./assets/images/splash-icon-2.png",
+          "backgroundColor": "#000000",
+          "dark": {
+            "image": "./assets/images/splash-icon-2.png",
+            "backgroundColor": "#000000"
+          },
           "imageWidth": 100,
-          "resizeMode": "contain",
-          "backgroundColor": "white"
+          "resizeMode": "contain"
         }
       ]
     ],

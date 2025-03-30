@@ -27,12 +27,23 @@ const account = () => {
           alignItems: "center",
         }}
       >
-        <Text style={{ fontSize: 50, color: "white", fontWeight: "600" }}>
+        <Text
+          style={{
+            fontSize: 50,
+            fontFamily: "SpaceMono",
+            color: "white",
+            fontWeight: "600",
+          }}
+        >
           {user?.display_name.charAt(0).toUpperCase()}
         </Text>
       </View>
       <Text
-        style={{ color: theme === "dark" ? "white" : "black", fontSize: 25 }}
+        style={{
+          color: theme === "dark" ? "white" : "black",
+          fontSize: 25,
+          fontFamily: "SpaceMono",
+        }}
       >
         {user?.display_name}
       </Text>

@@ -46,7 +46,14 @@ const TaskInput = () => {
   return (
     <View style={[inputContainer, { marginTop: 30, marginBottom: 40 }]}>
       <TextInput
-        style={[inputStyle, { color: inputColor, borderColor: borderColor }]}
+        style={[
+          inputStyle,
+          {
+            color: inputColor,
+            borderColor: borderColor,
+            fontFamily: "SpaceMono",
+          },
+        ]}
         value={todoString}
         placeholder="Add your task"
         placeholderTextColor={placeholder}

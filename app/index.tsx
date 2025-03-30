@@ -12,7 +12,12 @@ const index = () => {
       style={[styles.wrapper, theme === "dark" ? styles.dark : styles.light]}
     >
       <Text
-        style={[styles.text, theme === "light" && { color: colors.textlight }]}
+        style={[
+          styles.text,
+          theme === "light" && {
+            color: colors.textlight,
+          },
+        ]}
       >
         Welcome to Check It, the true minimalism
       </Text>
@@ -45,7 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "#fff",
     fontWeight: "700",
-    textAlign: 'center',
+    textAlign: "center",
   },
   link: {
     backgroundColor: "#48ffdb",
@@ -56,5 +61,6 @@ const styles = StyleSheet.create({
     width: 300,
     borderRadius: 5,
     fontSize: 20,
+    fontFamily: "SpaceMono",
   },
 });

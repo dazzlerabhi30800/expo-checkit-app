@@ -113,8 +113,9 @@ const TaskComp = ({ item }: taskComp) => {
           <Text
             style={{
               color: theme === "dark" ? "white" : "black",
-              fontSize: 20,
+              fontSize: 18,
               textDecorationLine: item.completed ? "line-through" : "none",
+              fontFamily: "SpaceMono",
             }}
           >
             {item.task}
@@ -124,11 +125,7 @@ const TaskComp = ({ item }: taskComp) => {
       {!edit && (
         <View style={styles.taskContainer}>
           <TouchableOpacity onPress={() => handleDelete(item.id)}>
-            <AntDesign
-              name="delete"
-              size={24}
-              color={"red"}
-            />
+            <AntDesign name="delete" size={24} color={"red"} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => setEdit(true)}>
             <Feather name="edit" size={24} color="green" />
