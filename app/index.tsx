@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "#fff",
     fontWeight: "700",
+    textAlign: 'center',
   },
   link: {
     backgroundColor: "#48ffdb",
