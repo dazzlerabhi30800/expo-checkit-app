@@ -41,7 +41,6 @@ export const useTodoSlice = create<slice>()(
         }
         if (!error && data) {
           const sortedTodos = data.sort((a, b) => a.position - b.position);
-          console.log(sortedTodos);
           set({ todos: sortedTodos });
         }
       },

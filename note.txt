@@ -5,7 +5,8 @@
 5. X -> Design Sign up page
 6. X -> Design login up page
 7. X -> useEffect func to check active user session.
-8. -> complete the task component with delete, edit & animations.
-10. -> add the taskInput comp as header in flatList
-11. -> splash image update
-12. -> app icon update
+8. X -> complete the task component with delete, edit & animations.
+10.X -> add the taskInput comp as header in flatList
+11.X -> multiple fonts for task text & header.
+12. -> splash image update
+13. -> app icon update
