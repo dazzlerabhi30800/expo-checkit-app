@@ -29,7 +29,7 @@ const explorer = () => {
       return;
     }
     const { error } = await supabase.auth.signInWithPassword({
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     });
     if (error) {

@@ -39,7 +39,7 @@ const index = () => {
       return;
     }
     const { data, error } = await supabase.auth.signUp({
-      email: email,
+      email: email.toLowerCase(),
       password: password,
       options: {
         data: {
