@@ -27,7 +27,6 @@ export default function RootLayout() {
     supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
         setUser(session?.user.user_metadata);
-        console.log(session);
       } else {
         setUser(null);
         router.replace("/");
