@@ -27,6 +27,7 @@ export default function RootLayout() {
     supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
         setUser(session?.user.user_metadata);
+        console.log(session);
       } else {
         setUser(null);
         router.replace("/");
@@ -45,6 +46,7 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="confirm" options={{ headerShown: false }} />
       </Stack>
       <StatusBar style={theme === "dark" ? "light" : "dark"} />
     </>

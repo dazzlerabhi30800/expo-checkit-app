@@ -39,7 +39,8 @@ const InputComp = ({ setState, value, type, placeholderText }: inputProps) => {
           color: inputColor,
         }}
         value={value}
-        onChangeText={(e) => setState(e)}
+        onChangeText={(e) => setState(type === "email" ? e.toLowerCase() : e)}
+        autoCapitalize={type === "email" ? "none" : "words"}
       />
       {type === "password" && (
         <TouchableOpacity

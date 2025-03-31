@@ -8,10 +8,6 @@ import { Link, router } from "expo-router";
 import { supabase } from "@/utils/supabase/supabase";
 
 const explorer = () => {
-  const handleAuth = () => {
-    Alert.alert("You are logged In!");
-  };
-
   const { theme } = useTodoSlice((state) => state);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

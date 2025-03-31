@@ -5,7 +5,7 @@ import { colors } from "@/utils/color";
 import { useState } from "react";
 import InputComp from "@/components/InputComp";
 import SubmitBtnComp from "@/components/SubmitBtnComp";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { supabase } from "@/utils/supabase/supabase";
 
 AppState.addEventListener("change", (state) => {
@@ -49,8 +49,9 @@ const index = () => {
     });
     if (error) {
       Alert.alert(error.message);
-    } else {
-      console.log(data);
+    }
+    if (data && !error) {
+      router.push("/confirm");
     }
     setLoading(false);
   };
