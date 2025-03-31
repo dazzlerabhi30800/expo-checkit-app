@@ -8,5 +8,5 @@
 8. X -> complete the task component with delete, edit & animations.
 10.X -> add the taskInput comp as header in flatList
 11.X -> multiple fonts for task text & header.
-12. -> splash image update
-13. -> app icon update
+12.X -> splash image update
+13.X -> app icon update
